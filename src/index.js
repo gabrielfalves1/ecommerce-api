@@ -9,4 +9,3 @@ app.listen(port, () => {
 
 app.use('/products', products);
 
-s
