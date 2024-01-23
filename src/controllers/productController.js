@@ -1,28 +1,63 @@
-const productService = require('../services/productService');
-//const Product = require('../models/product');
+const ProductService = require('../services/ProductService')
 
 exports.getAll = async (req, res) => {
     try {
-        const products = await productService.getAll();
-        res.json(products);
+        const results = await ProductService.getAll()
+        res.json(results)
 
     } catch (err) {
-        res.status(500).json({ error: 'Erro Interno do Servidor' });
-        console.error(err.message);
+        res.status(500).json({ error: 'Erro Interno do Servidor' })
+        console.error(err.message)
     }
-};
+}
 
 exports.findById = async (req, res) => {
     try {
-        const product = await productService.findById(req.params.id);
-        if (product) {
-            res.json(product);
+        const id = req.params.id
+        const result = await ProductService.findById(id)
+        if (result) {
+            res.json(result)
         } else {
             res.status(404).json({ error: 'Produto não encontrado.' })
         }
 
     } catch (err) {
-        res.status(500).json({ error: 'Erro Interno do Servidor' });
-        console.error(err.message);
+        res.status(500).json({ error: 'Erro Interno do Servidor' })
+        console.error(err.message)
+    }
+}
+
+exports.create = async (req, res) => {
+    try {
+        const product = req.body
+        const result = await ProductService.create(product);
+
+        if (result.success) {
+            res.json({ success: result.message })
+        } else {
+            res.status(404).json({ error: result.message })
+        }
+
+    } catch (err) {
+        res.status(500).json({ error: 'Erro Interno do Servidor' })
+        console.error(err.message)
+    }
+}
+
+exports.edit = async (req, res) => {
+    try {
+        const product = req.body
+        const id = req.params.id
+        const result = await ProductService.edit(product, id)
+
+        if (result.success) {
+            res.json({ success: result.message })
+        } else {
+            res.status(404).json({ error: result.message })
+        }
+
+    } catch (err) {
+        res.status(500).json({ error: 'Erro Interno do Servidor' })
+        console.error(err.message)
     }
 }

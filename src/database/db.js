@@ -1,5 +1,5 @@
 require('dotenv').config()
-var mysql = require('mysql2');
+var mysql = require('mysql2')
 var connection = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -7,4 +7,4 @@ var connection = mysql.createConnection({
     database: process.env.database
 });
 
-module.exports = connection;
+module.exports = connection
