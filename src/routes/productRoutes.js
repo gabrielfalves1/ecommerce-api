@@ -4,13 +4,13 @@ const router = express.Router();
 
 router.get('/', productController.getAll);
 
-router.post('/:id', (req, res) => {
+router.get('/:id', productController.findById);
 
-})
+router.post('/:id',);
 
-router.put('/:id', (req, res) => {
+router.put('/:id',);
 
-})
+router.delete('/:id',);
 
 module.exports = router;
 
