@@ -61,3 +61,20 @@ exports.edit = async (req, res) => {
         console.error(err.message)
     }
 }
+
+exports.remove = async (req, res) => {
+    try {
+        const id = req.params.id
+        const result = await ProductService.remove(id)
+
+        if (result.success) {
+            res.json({ success: result.message })
+        } else {
+            res.status(404).json({ error: result.message })
+        }
+
+    } catch (error) {
+        res.status(500).json({ error: 'Erro Interno do Servidor' })
+        console.error(err.message)
+    }
+}

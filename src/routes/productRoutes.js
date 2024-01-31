@@ -8,11 +8,9 @@ router.get('/:id', ProductController.findById)
 
 router.post('/', ProductController.create)
 
-router.post('/:id',)
-
 router.put('/:id', ProductController.edit)
 
-router.delete('/:id',)
+router.delete('/:id', ProductController.remove)
 
 module.exports = router
 
