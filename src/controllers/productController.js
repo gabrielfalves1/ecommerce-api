@@ -1,4 +1,5 @@
-const ProductService = require('../services/ProductService')
+const ProductService = require('../services/productService')
+const { Product } = require('../models/Product')
 
 exports.getAll = async (req, res) => {
     try {
@@ -28,9 +29,10 @@ exports.findById = async (req, res) => {
 }
 
 exports.create = async (req, res) => {
+    const { name, description, price } = req.body;
+    const newProduct = new Product(name, description, price)
     try {
-        const product = req.body
-        const result = await ProductService.create(product);
+        const result = await ProductService.create(newProduct);
 
         if (result.success) {
             res.json({ success: result.message })
@@ -42,6 +44,7 @@ exports.create = async (req, res) => {
         res.status(500).json({ error: 'Erro Interno do Servidor' })
         console.error(err.message)
     }
+
 }
 
 exports.edit = async (req, res) => {

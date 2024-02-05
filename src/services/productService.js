@@ -1,5 +1,4 @@
 const conn = require('../database/db')
-const { v4: uuidv4 } = require('uuid')
 
 exports.getAll = () => {
     return new Promise((resolve, reject) => {
@@ -31,9 +30,8 @@ exports.findById = (id) => {
 
 exports.create = (product) => {
     return new Promise((resolve, reject) => {
-        const id = uuidv4()
         conn.query("INSERT INTO products(id, name, description, price) VALUES(?, ?, ?, ?)",
-            [id, product.name, product.description, product.price],
+            [product.id, product.name, product.description, product.price],
             function (error, result) {
                 if (error) {
                     reject(error)
